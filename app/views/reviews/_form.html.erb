@@ -1,16 +1,34 @@
-<%= simple_form_for(@review) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :rating %>
-    <%= f.input :comment %>
-    <%= f.input :user_id %>
-    <%= f.input :movie_id %>
-    <%= f.association :movie %>
-    <%= f.association :user %>
+<%= form_for @review, :html => { :class => 'form-horizontal form-model' } do |f| %>
+  <div class="form-group">
+    <%= f.label :rating, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.number_field :rating, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :comment, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_area :comment, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.number_field :user_id, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :movie_id, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.number_field :movie_id, :class => 'text-field form-control' %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  reviews_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>
