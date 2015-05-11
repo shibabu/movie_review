@@ -1,0 +1,16 @@
+<%= simple_form_for(@review) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :rating %>
+    <%= f.input :comment %>
+    <%= f.input :user_id %>
+    <%= f.input :movie_id %>
+    <%= f.association :movie %>
+    <%= f.association :user %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
