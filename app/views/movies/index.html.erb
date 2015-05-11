@@ -1,37 +1,46 @@
-<h1>Listing movies</h1>
-
-<table>
+<%- model_class = Movie -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Movie %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Movie length</th>
-      <th>Director</th>
-      <th>Rating</th>
-      <th>User</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:movie_length) %></th>
+      <th><%= model_class.human_attribute_name(:director) %></th>
+      <th><%= model_class.human_attribute_name(:rating) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
+        <td><%= movie.id %></td>
         <td><%= movie.title %></td>
         <td><%= movie.description %></td>
         <td><%= movie.movie_length %></td>
         <td><%= movie.director %></td>
         <td><%= movie.rating %></td>
-        <td><%= movie.user %></td>
         <td><%= movie.user_id %></td>
-        <td><%= link_to 'Show', movie %></td>
-        <td><%= link_to 'Edit', edit_movie_path(movie) %></td>
-        <td><%= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l movie.created_at, format: :long %></td>
+        <td>
+          <%= link_to movie_path(movie), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to movie_path(movie), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Movie', new_movie_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_movie_path,
+            :class => 'btn btn-primary' %>
